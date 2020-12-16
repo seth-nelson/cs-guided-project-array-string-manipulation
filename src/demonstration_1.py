@@ -20,6 +20,8 @@ Output: -1
 Explanation:
 There is no index that satisfies the conditions in the problem statement.
 """
+
+# --- FIRST OPTION ---
 # def pivot_index_old(nums):
 #     # search through nums list fo a pivot index
 #     # go through each item in nums
@@ -38,30 +40,53 @@ There is no index that satisfies the conditions in the problem statement.
 #             return i
         
 #     return -1
-    
-    
-def pivot_index(nums):
-    # create Lsum and Rsum
-    l_sum = 0
-    r_sum = sum(nums[1:])
-    
-    # search through the array and check if the index is a pivot index
-    for i in range(len(nums)):
-        # check if l_sum == r_sum
-        if l_sum == r_sum:
-            return i
-        # add number at current index to left sum
-        l_sum += nums[i]
-        # check that we are not at the last index
-        if (i+1 == len(nums)):
-            r_sum = 0
-        else:
-            r_sum -= nums[i+1]
-            
-    return -1
-    
+
 # print(pivot_index_old([1,7,3,6,5,6]))
 # print(pivot_index_old([1,2,3]))
+    
+
+
+# --- SECOND OPTION ----
+# def pivot_index(nums):
+#     # create Lsum and Rsum
+#     l_sum = 0
+#     r_sum = sum(nums[1:])
+    
+#     # search through the array and check if the index is a pivot index
+#     for i in range(len(nums)):
+#         # check if l_sum == r_sum
+#         if l_sum == r_sum:
+#             return i
+#         # add number at current index to left sum
+#         l_sum += nums[i]
+#         # check that we are not at the last index
+#         if (i+1 == len(nums)):
+#             r_sum = 0
+#         else:
+#             r_sum -= nums[i+1]
+            
+#     return -1
+
+# print(pivot_index([1,7,3,6,5,6]))
+# print(pivot_index([1,2,3]))
+
+
+
+# --- THIRD OPTION ----
+def pivot_index(nums):
+    total_sum = sum(nums)
+    left_sum = 0
+    
+    # as we go through the array, update left_sum
+    for i in range(len(nums)):
+        right_sum = total_sum - left_sum - nums[i]
+        # print(left_sum, right_sum)
+        if left_sum == right_sum:
+            return i
+        left_sum += nums[i]
+        
+    return -1
+
 
 print(pivot_index([1,7,3,6,5,6]))
 print(pivot_index([1,2,3]))
